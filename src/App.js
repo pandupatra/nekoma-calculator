@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   const [currentSum, setCurrentSum] = useState(0);
   const [currentMultiple , setCurrentMultiple] = useState(0);
+  const [currentCrystalPar, setCurrentCrystalPar] = useState(0);
   const [clear, setClear] = useState(false);
 
   useEffect(() => {
@@ -28,8 +29,10 @@ function App() {
       return;
     let sum = currentNum1 - currentNum2;
     let multiple = sum * currentNum3;
+    let crystalPar = (currentNum1 * currentNum3) - multiple;
     setCurrentSum(sum);
     setCurrentMultiple(multiple);
+    setCurrentCrystalPar(crystalPar);
   }
 
   const Clear = (e) => {
@@ -39,13 +42,14 @@ function App() {
     setClear(true);
     setCurrentSum(0);
     setCurrentMultiple(0);
+    setCurrentCrystalPar(0);
   }
 
   return (
     <div className="App">
-      <Container>
+      <Container style={{maxWidth: 700}}>
         <div className="app-title">
-          <h1>Nekoma Calculator</h1>
+          <h2>Nekoma Endless Tower Exchange Calculator</h2>
         </div>
         <Form>
           <Form.Group className="mb-3" controlId="num1">
@@ -62,10 +66,12 @@ function App() {
           </Form.Group>
           
         </Form>
-        <div className="mb-3" id="result1">Kamu kurang {currentSum} item</div>
-        <div className="mb-3" id="result2">Kamu butuh {currentMultiple} crystal</div>
-        <div>Kamu menghemat</div>
-        <Button onClick={Clear}>Clear</Button>
+        <div style={{textAlign: 'center'}}>
+          <div className="mb-3" id="result1">Kamu kurang <strong>{currentSum} Item</strong></div>
+          <div className="mb-3" id="result2">Kamu butuh <strong>{currentMultiple} Crystal</strong></div>
+          <div className="mb-3" id="result3">Kamu menghemat <strong>{currentCrystalPar} Crystal</strong></div>
+          <Button onClick={Clear}>Clear</Button>
+        </div>
       </Container>
     </div>
   );
